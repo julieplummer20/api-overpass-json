@@ -1,0 +1,31 @@
+<?sap.transform simple?>
+<tt:transform xmlns:tt="http://www.sap.com/transformation-templates">
+
+  <tt:root name="osm"/>
+
+  <tt:template>
+    <osm tt:ref=".osm">
+      <tt:attribute name="version" value-ref="api_version"/>
+      <tt:attribute name="generator" value-ref="api_generator"/>
+      <note tt:value-ref="note"/>
+      <meta tt:ref="metadata">
+        <tt:attribute name="osm_base" value-ref="osm_base"/>
+        <tt:attribute name="areas" value-ref="osm_areas"/>
+      </meta>
+      <tt:loop ref="nodes">
+        <node>
+          <tt:attribute name="id" value-ref="id"/>
+          <tt:attribute name="lat" value-ref="latitude"/>
+          <tt:attribute name="lon" value-ref="longitude"/>
+          <tt:loop ref="tags">
+            <tag>
+              <tt:attribute name="k" value-ref="property"/>
+              <tt:attribute name="v" value-ref="value"/>
+            </tag>
+          </tt:loop>
+        </node>
+      </tt:loop>
+    </osm>
+  </tt:template>
+
+</tt:transform>
